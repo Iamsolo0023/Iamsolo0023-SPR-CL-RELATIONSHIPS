@@ -26,17 +26,18 @@ public class Album {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long albumId;
     private String title;
-
+    @ManyToOne
+    @JoinColumn(name = "artist_id", nullable = false)
     /**
      * Review the other model classes to see examples of annotations that link entities.
      */
     private Artist artist;
-
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
     /**
      * Review the other model classes to see examples of annotations that link entities.
      */
     private List<Song> songs;
-
+    
     public Album(String title) {
         this.title = title;
     }
